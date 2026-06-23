@@ -86,7 +86,7 @@ environment:
 
 ```
 VS Code OTEL Exporter
-    ↓ [gRPC: localhost:4317]
+    ↓ [otlp-http: localhost:4318]
 Grafana OTEL-LGTM Container
 ├── OTEL Collector
 ├── Mimir (metrics storage)
