@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  lgtm:
+    image: docker.io/grafana/otel-lgtm:latest
+    container_name: copilot-dashboard-lgtm
+    ports:
+      - "3000:3000"      # Grafana UI
+      - "4317:4317"      # OTEL gRPC receiver
+      - "4318:4318"      # OTEL HTTP receiver
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/otel-lgtm/grafana/conf/provisioning/dashboards/custom/token-usage-by-model.json
+    volumes:
+      - lgtm_data:/var/lib/grafana
+      - lgtm_mimir:/loki/boltdb-shipper
+      - ./grafana/dashboards/token-usage-by-model.json:/otel-lgtm/grafana/conf/provisioning/dashboards/custom/token-usage-by-model.json:ro
+      - ./dashboards-provisioning.yaml:/otel-lgtm/grafana/conf/provisioning/dashboards/custom.yaml:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  lgtm_data:
+  lgtm_mimir:

@@ -1,0 +1,21 @@
+# Docker volumes and data
+lgtm_data/
+lgtm_mimir/
+
+# Docker Compose
+.env.local
+docker-compose.override.yml
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
