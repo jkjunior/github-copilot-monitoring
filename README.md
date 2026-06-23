@@ -121,11 +121,3 @@ docker-compose down -v
 ```bash
 docker-compose config
 ```
-
-Then open Grafana at http://localhost:3000 and verify the dashboard appears in the dashboard list.
-
-Tip: Keep dashboard filenames stable to avoid resetting home dashboard paths.
-
-## License
-
-MIT
